@@ -21,24 +21,28 @@ const ProductList = () => {
       <h1> ProductList </h1>
       <section className="products">
         {products.map((product) => (
-          <Card style={{ width: "18rem" }} className="product">
+          <Card style={{ width: "16rem" }} className="product">
             <center>
               <Card.Img
                 variant="top"
                 src={product.image}
-                style={{ width: "9rem", height: "12rem" }}
+                style={{ width: "7.5rem", height: "8rem" }}
               />
             </center>
             <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Text style={{ overflow: "scroll", height: "200px" }}>
+              <Card.Title style={{height:"100px"}}>{product.title}</Card.Title>
+              <Card.Text style={{ overflow: "scroll", height: "200px",paddingTop:"10px" }}>
                 {product.description}
               </Card.Text>
             </Card.Body>
-            <Card.Footer style={{display:"flex",justifyContent:"space-evenly",alignItems:"center"}}>
-              <Card.Text>
-                ${product.price}
-              </Card.Text>
+            <Card.Footer
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+              }}
+            >
+              <Card.Text>${product.price}</Card.Text>
               <Button variant="primary">Add to cart</Button>
             </Card.Footer>
           </Card>

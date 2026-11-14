@@ -1,13 +1,13 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { Outlet,Link } from "react-router-dom";
+import Button from "react-bootstrap/button";
 
 
 const Products = ()=>{
+
+
     return(
         <div>
-            Products
-            <Link to="list"> List </Link>
-            <Link to="details"> Details </Link>
             <Outlet/>
         </div>
     )

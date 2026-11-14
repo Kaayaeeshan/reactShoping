@@ -56,3 +56,16 @@ main .addItem input{
   height: 40px ;
   margin-right: 5px;
 }
+
+.products{
+  width: 95vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+.product{
+  flex-grow: 1;
+}

@@ -20,15 +20,15 @@ function App() {
         <NavBar />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />}>
-            <Route index element={<ProductList />} />
-            <Route path="list" element={<ProductList />} />
-            <Route path="details" element={<ProductDetails />} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/products" element={<Products/>}>
+            <Route index element={<ProductList/>} />
+            <Route path="list" element={<ProductList/>} />
+            <Route path="details" element={<ProductDetails/>} />
           </Route>
-          <Route path="/login/:newUser" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/todo" element={<TodoApp />} />
+          <Route path="/login/:newUser" element={<Login/>} />
+          <Route path="/sign-up" element={<SignUp/>} />
+          <Route path="/todo" element={<TodoApp/>} />
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </Router>

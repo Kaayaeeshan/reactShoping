@@ -2,39 +2,45 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Atom } from "react-loading-indicators";
+import useFetch from "./custom-hook/useFetch";
 
 const ProductList = () => {
-  let [products, setProducts] = useState([]);
-  let [error, setError] = useState("");
-  let [isLoading, setIsLoading] = useState(true);
+  let { products, error, isLoading } = useFetch(
+    "http://localhost:4000/products",
+  );
 
-  useEffect(() => {
-    fetch("http://localhost:4000/products", { method: "GET" })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Search proper data");
-        }
-      })
+  //   let [products, setProducts] = useState([]);
+  //   let [error, setError] = useState("");
+  //   let [isLoading, setIsLoading] = useState(true);
 
-      .then((data) => {
-        setProducts(data);
-      })
+  //   useEffect(() => {
+  //     fetch("http://localhost:4000/products", { method: "GET" })
+  //       .then((response) => {
+  //         if (response.ok) {
+  //           return response.json();
+  //         } else {
+  //           throw new Error("Search proper data");
+  //         }
+  //       })
 
-      .catch((error) => {
-        setError(error.message);
-      })
+  //       .then((data) => {
+  //         setProducts(data);
+  //       })
 
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  //       .catch((error) => {
+  //         setError(error.message);
+  //       })
+
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }, []);
 
   if (isLoading) {
     return (
       <div>
         <center>
+          {console.log(isLoading)}
           <Atom
             color="#32cd32"
             size="large"

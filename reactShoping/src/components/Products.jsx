@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import { Outlet,Link } from "react-router-dom";
-import Button from "react-bootstrap/button";
+import Button from "react-bootstrap/Button";
 
 
 const Products = ()=>{

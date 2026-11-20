@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./components/home";
+import Home from "./components/Home";
 import TodoApp from "./components/TodoApp";
 import Products from "./components/Products";
 import Login from "./components/Login";
@@ -10,6 +10,8 @@ import ProductDetails from "./components/ProductDetails";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound"
+import NewProduct from "./components/NewProduct";
+import UpdateProduct from "./components/UpdateProduct"
 
 function App() {
   let user = "Kaayaeeshan";
@@ -29,6 +31,8 @@ function App() {
           <Route path="/login/:newUser" element={<Login/>} />
           <Route path="/sign-up" element={<SignUp/>} />
           <Route path="/todo" element={<TodoApp/>} />
+          <Route path="/newProduct" element={<NewProduct/>}/>
+          <Route path="/update/:id" element={<UpdateProduct/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </Router>

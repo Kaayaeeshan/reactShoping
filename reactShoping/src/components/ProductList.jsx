@@ -7,11 +7,70 @@ import { FaCartShopping } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const ProductList = () => {
   let navigate = useNavigate();
 
-  let { products, error, isLoading } = useFetch(
+ let handleDelete = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    // 1. Ask for confirmation FIRST
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        // 2. ONLY if user confirms, do the API call and state update
+        if (result.isConfirmed) {
+          axios
+            .delete(`http://localhost:4000/products/${id}`)
+            .then(() => {
+              // Update the UI state ONLY after the server confirms deletion
+              let newProductList = products.filter((product) => product.id !== id);
+              setProducts(newProductList);
+
+              // Show success message
+              swalWithBootstrapButtons.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            })
+            .catch((error) => {
+               // Optional: handle API errors
+               swalWithBootstrapButtons.fire({
+                title: "Error!",
+                text: "Something went wrong.",
+                icon: "error",
+              });
+            });
+            
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // 3. If user cancels, just show the cancel message. Do nothing else.
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error",
+          });
+        }
+      });
+  };
+
+  let { products, error, isLoading, setProducts } = useFetch(
     "http://localhost:4000/products",
   );
 
@@ -59,6 +118,10 @@ const ProductList = () => {
   } else {
     return (
       <div>
+        <article>
+          <span>To create new product</span>
+          <Button onClick={()=>{navigate("/newProduct")}} style={{marginLeft:"1%",height:"30px",fontSize:"15px",textAlign:"center", justifyContent:"center",paddingBottom:"30px"}}>click me </Button>
+        </article>
         <h1> Product List </h1>
         {products.length !== 0 && (
           <section className="products">
@@ -106,12 +169,18 @@ const ProductList = () => {
                     variant="secondary"
                     style={{ fontSize: "12px" }}
                     onClick={() => {
-                      navigate(`/update/${product.id}`)
+                      navigate(`/update/${product.id}`);
                     }}
                   >
                     <FaEdit />
                   </Button>
-                  <Button variant="danger" style={{ fontSize: "12px" }}>
+                  <Button
+                    variant="danger"
+                    style={{ fontSize: "12px" }}
+                    onClick={() => {
+                      handleDelete(product.id);
+                    }}
+                  >
                     <RiDeleteBin5Fill />
                   </Button>
                 </Card.Footer>

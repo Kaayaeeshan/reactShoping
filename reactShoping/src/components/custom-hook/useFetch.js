@@ -33,7 +33,7 @@ function useFetch(url) {
     fetchApi();
   }, []);
 
-  return{products,error,isLoading}
+  return{products,error,isLoading,setProducts}
 }
 
 export default useFetch;

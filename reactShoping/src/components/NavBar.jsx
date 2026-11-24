@@ -5,9 +5,11 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { MdShoppingCart } from "react-icons/md";
 
 const NavBar = () => {
+  let navigate=useNavigate()
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -35,6 +37,9 @@ const NavBar = () => {
             </Nav.Link>
           </Nav>
           <Form className="d-flex">
+            <Button variant="contained" color="warning" style={{backgroundColor:"orange"}} onClick={()=>{
+              navigate("/wishlist")
+            }} ><MdShoppingCart/></Button>
             <Form.Control
               type="search"
               placeholder="Search"

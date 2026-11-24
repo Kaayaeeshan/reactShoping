@@ -9,11 +9,13 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/carSlice";
 
 const ProductList = () => {
   let navigate = useNavigate();
 
- let handleDelete = (id) => {
+  let handleDelete = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -40,7 +42,9 @@ const ProductList = () => {
             .delete(`http://localhost:4000/products/${id}`)
             .then(() => {
               // Update the UI state ONLY after the server confirms deletion
-              let newProductList = products.filter((product) => product.id !== id);
+              let newProductList = products.filter(
+                (product) => product.id !== id,
+              );
               setProducts(newProductList);
 
               // Show success message
@@ -51,14 +55,13 @@ const ProductList = () => {
               });
             })
             .catch((error) => {
-               // Optional: handle API errors
-               swalWithBootstrapButtons.fire({
+              // Optional: handle API errors
+              swalWithBootstrapButtons.fire({
                 title: "Error!",
                 text: "Something went wrong.",
                 icon: "error",
               });
             });
-            
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // 3. If user cancels, just show the cancel message. Do nothing else.
           swalWithBootstrapButtons.fire({
@@ -101,6 +104,12 @@ const ProductList = () => {
   //       });
   //   }, []);
 
+  let dispatch = useDispatch()
+
+  let addItemToCart = (product) => {
+    dispatch(addItem(product))
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -120,7 +129,21 @@ const ProductList = () => {
       <div>
         <article>
           <span>To create new product</span>
-          <Button onClick={()=>{navigate("/newProduct")}} style={{marginLeft:"1%",height:"30px",fontSize:"15px",textAlign:"center", justifyContent:"center",paddingBottom:"30px"}}>click me </Button>
+          <Button
+            onClick={() => {
+              navigate("/newProduct");
+            }}
+            style={{
+              marginLeft: "1%",
+              height: "30px",
+              fontSize: "15px",
+              textAlign: "center",
+              justifyContent: "center",
+              paddingBottom: "30px",
+            }}
+          >
+            click me{" "}
+          </Button>
         </article>
         <h1> Product List </h1>
         {products.length !== 0 && (
@@ -162,6 +185,7 @@ const ProductList = () => {
                       height: "1.6rem",
                       paddingtop: "0px",
                     }}
+                    onClick={() => addItemToCart(product)}
                   >
                     <FaCartShopping />
                   </Button>

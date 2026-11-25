@@ -9,7 +9,7 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../store/carSlice";
 
 const ProductList = () => {
@@ -104,10 +104,32 @@ const ProductList = () => {
   //       });
   //   }, []);
 
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
+  let cartState = useSelector((state) => {
+    return state.cart;
+  });
 
   let addItemToCart = (product) => {
-    dispatch(addItem(product))
+    let checkProduct = cartState.some(
+      cartProduct => cartProduct.id === product.id,
+    )
+
+    if (!checkProduct) {
+      dispatch(addItem(product))
+      Swal.fire({
+          title: "Success",
+          text: "Product Added Successfully",
+          icon: "success",
+        })
+    }
+    else{
+      Swal.fire({
+          title: "Oops!",
+          text: "Product Already Added",
+          icon: "error",
+          footer : "<p> Add Some other Product </p>"
+        })
+    }
   };
 
   if (isLoading) {

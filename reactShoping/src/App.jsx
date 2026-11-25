@@ -9,12 +9,14 @@ import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/NavBar";
-import NotFound from "./components/NotFound"
+import NotFound from "./components/NotFound";
 import NewProduct from "./components/NewProduct";
-import UpdateProduct from "./components/UpdateProduct"
+import UpdateProduct from "./components/UpdateProduct";
 import WishList from "./components/WishList";
 
-localStorage.setItem("cart",JSON.stringify([]))
+if ( !localStorage.getItem("cart")) {
+  localStorage.setItem("cart", JSON.stringify([]));
+} 
 
 function App() {
   let user = "Kaayaeeshan";
@@ -25,19 +27,19 @@ function App() {
         <NavBar />
 
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/products" element={<Products/>}>
-            <Route index element={<ProductList/>} />
-            <Route path="list" element={<ProductList/>} />
-            <Route path="details" element={<ProductDetails/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />}>
+            <Route index element={<ProductList />} />
+            <Route path="list" element={<ProductList />} />
+            <Route path="details" element={<ProductDetails />} />
           </Route>
-          <Route path="/login/:newUser" element={<Login/>} />
-          <Route path="/sign-up" element={<SignUp/>} />
-          <Route path="/todo" element={<TodoApp/>} />
-          <Route path="/newProduct" element={<NewProduct/>}/>
-          <Route path="/update/:id" element={<UpdateProduct/>}/>
-          <Route path="/wishlist" element={<WishList/>}/>
-          <Route path="*" element={<NotFound/>}/>
+          <Route path="/login/:newUser" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/todo" element={<TodoApp />} />
+          <Route path="/newProduct" element={<NewProduct />} />
+          <Route path="/update/:id" element={<UpdateProduct />} />
+          <Route path="/wishlist" element={<WishList />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>

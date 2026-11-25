@@ -6,6 +6,8 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       state.push(action.payload);
+
+      localStorage.setItem("cart", JSON.stringify([...state]));
     },
 
     removeItem(state, action) {
@@ -13,7 +15,7 @@ const cartSlice = createSlice({
       let newProducts = state.filter(
         (cartProducts) => cartProducts.id !== itemId,
       );
-
+      localStorage.setItem("cart", JSON.stringify([...newProducts]));
       return newProducts;
     },
   },

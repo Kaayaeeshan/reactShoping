@@ -14,6 +14,8 @@ import NewProduct from "./components/NewProduct";
 import UpdateProduct from "./components/UpdateProduct"
 import WishList from "./components/WishList";
 
+localStorage.setItem("cart",JSON.stringify([]))
+
 function App() {
   let user = "Kaayaeeshan";
 

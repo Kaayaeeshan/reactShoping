@@ -39,7 +39,7 @@ const ProductList = () => {
         // 2. ONLY if user confirms, do the API call and state update
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:4000/products/${id}`)
+            .delete(`https://fakestoreapi.com/products/${id}`)
             .then(() => {
               // Update the UI state ONLY after the server confirms deletion
               let newProductList = products.filter(

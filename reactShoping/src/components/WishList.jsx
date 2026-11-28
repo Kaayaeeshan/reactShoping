@@ -6,11 +6,10 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { removeItem } from "../store/carSlice";
 
 const WishList = () => {
-
-    let dispatch = useDispatch()
-    let handleDelete =(reduxItem)=>{
-        dispatch(removeItem(reduxItem))
-    }
+  let dispatch = useDispatch();
+  let handleDelete = (reduxItem) => {
+    dispatch(removeItem(reduxItem));
+  };
 
   let cartProducts = useSelector((state) => {
     return state.cart;

@@ -4,7 +4,7 @@ import { Atom } from "react-loading-indicators";
 
 const Home = () => {
   let { products, error, isLoading } = useFetch(
-    "http://localhost:4000/products",
+    "https://fakestoreapi.com/products",
   );
   if (isLoading) {
     return (

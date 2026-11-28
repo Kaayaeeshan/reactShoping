@@ -49,7 +49,7 @@ const NewProduct = () => {
   let handleUpdate = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:4000/products/${id}`, {
+    fetch(`https://fakestoreapi.com/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

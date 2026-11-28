@@ -1,8 +1,9 @@
-import React from "react";
+import {React} from "react";
 import { Paper, TextField, Typography, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {useNavigate} from "react-router-dom"
 
 let schema = Yup.object().shape({
   name: Yup.string()
@@ -40,7 +41,12 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
 
-  let handleData = (data) => {};
+ let navigate= useNavigate()
+
+  let handleData = (data) => {
+    console.log(data)
+  navigate("/")
+  };
 
   return (
     <Paper
